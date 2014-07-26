@@ -44,7 +44,7 @@ define pgbouncer::instance (
   $basedir    = '',
   $options    = '',
   $prefix_cmd = '',
-  $order      = '50',
+  $order      = 50,
   ) {
   $args   = get_scope_args()
   $schema = {
@@ -114,12 +114,15 @@ define pgbouncer::instance (
   $pgbouncer_conf = merge($pgbouncer_def, $pgbouncer)
 
   $confile = "${pgbouncer::conf_dir}/${name}.ini"
-
+  
+  $offset  = $order + $index
   # install default startup
   concat::fragment { "${name}-instance":
     target  => $pgbouncer::start_path,
     content => template('pgbouncer/instance.erb'),
-    order   => $order + $index,
+    order   => 50,
+    # NOTE: This bug will be fixed.
+    #order   => $order + $index,
     require => Class['pgbouncer::package'],
     notify  => Class['pgbouncer::service'],
   }
