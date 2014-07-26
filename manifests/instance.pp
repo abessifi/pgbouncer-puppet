@@ -44,7 +44,7 @@ define pgbouncer::instance (
   $basedir    = '',
   $options    = '',
   $prefix_cmd = '',
-  $order      = 50,
+  $order      = '50',
   ) {
   $args   = get_scope_args()
   $schema = {

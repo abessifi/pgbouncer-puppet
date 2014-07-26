@@ -1,4 +1,7 @@
 class pgbouncer::config {
+
+  #notice("========> $pgbouncer")
+
   $config = $pgbouncer::start_path
   concat { $config:
     owner => root,
@@ -6,6 +9,8 @@ class pgbouncer::config {
     mode  => 0644,
   }
 
+  $db_users = $pgbouncer::db_users
+  
   # install pgbouncer permissions
   file { '/etc/pgbouncer/userlist.txt':
     content => template('pgbouncer/userlist.txt.erb'),

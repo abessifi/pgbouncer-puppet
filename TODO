@@ -1,0 +1,3 @@
+- Fix default value of $pgbouncer::instance::index
+- Why including pgbouncer before pgbouncer::instance in nodes.pp ?
+- Decide to keep or not modules (kwalify, concat) dependencies.

@@ -17,7 +17,7 @@ class pgbouncer::params {
   $user             = 'postgres'
   $group            = 'postgres'
   $version          = installed
-  $db_users         = {}
+  $db_users         = {'postgres' => 'postgres'}
   # default configurations.
   $databases = {
     '*' => 'host=127.0.0.1 port=5432'
