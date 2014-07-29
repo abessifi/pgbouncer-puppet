@@ -48,7 +48,6 @@ lint_validation() {
     rake ci:lint
     if [ $? -ne 0 ]; then
         echo "[WARN] Puppet code style not respected !"
-        exit 1
     fi
     echo "[OK] Tests passed."
 }
