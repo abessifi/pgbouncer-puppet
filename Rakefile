@@ -1,8 +1,26 @@
 LINT_IGNORES = ['rvm']
  
-namespace :lint do 
+namespace :ci do 
+  desc "Check YAML file structure."
+  task :yaml_checker do
+    begin
+      require 'yaml'
+    rescue LoadError
+      fail 'Cannot load yaml, did you install it?'
+    end
+
+    FileList['**/*.yaml'].each do |puppet_file|
+      begin
+        puts "Checking #{puppet_file}.."
+        YAML.load_file(puppet_file)
+      rescue SyntaxError, Exception => e
+        abort "Could not parse YAML:#{e.message}"
+      end
+    end
+  end
+
   desc "Check puppet module code style."
-  task :ci do
+  task :lint do
     begin
       require 'puppet-lint'
     rescue LoadError
